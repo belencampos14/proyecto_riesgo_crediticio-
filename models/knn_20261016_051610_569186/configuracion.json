@@ -1,0 +1,107 @@
+{
+    "algoritmo": "KNN",
+    "semilla": 42,
+    "k": 5,
+    "tamano_lote": 256,
+    "columnas_caracteristicas": [
+        "person_income",
+        "person_emp_length",
+        "loan_grade",
+        "loan_amnt",
+        "loan_int_rate",
+        "loan_percent_income",
+        "cb_person_default_on_file",
+        "cb_person_cred_hist_length",
+        "person_home_ownership_MORTGAGE",
+        "person_home_ownership_OTHER",
+        "person_home_ownership_OWN",
+        "person_home_ownership_RENT",
+        "loan_intent_DEBTCONSOLIDATION",
+        "loan_intent_EDUCATION",
+        "loan_intent_HOMEIMPROVEMENT",
+        "loan_intent_MEDICAL",
+        "loan_intent_PERSONAL",
+        "loan_intent_VENTURE"
+    ],
+    "columnas_excluidas": [
+        "loan_status",
+        "person_age"
+    ],
+    "preprocesamiento": {
+        "imputacion": [
+            {
+                "columna": "person_emp_length",
+                "mediana": 4.0
+            },
+            {
+                "columna": "loan_int_rate",
+                "mediana": 10.99
+            }
+        ],
+        "escalado_min_max": [
+            {
+                "columna": "person_age",
+                "minimo": 20.0,
+                "maximo": 144.0
+            },
+            {
+                "columna": "person_income",
+                "minimo": 4000.0,
+                "maximo": 6000000.0
+            },
+            {
+                "columna": "person_emp_length",
+                "minimo": 0.0,
+                "maximo": 14.0
+            },
+            {
+                "columna": "loan_amnt",
+                "minimo": 500.0,
+                "maximo": 35000.0
+            },
+            {
+                "columna": "loan_int_rate",
+                "minimo": 5.42,
+                "maximo": 23.22
+            },
+            {
+                "columna": "loan_percent_income",
+                "minimo": 0.0,
+                "maximo": 0.83
+            },
+            {
+                "columna": "cb_person_cred_hist_length",
+                "minimo": 2.0,
+                "maximo": 30.0
+            }
+        ]
+    },
+    "codificacion": {
+        "binaria": {
+            "columna": "cb_person_default_on_file",
+            "valor_positivo": "Y"
+        },
+        "ordinal": {
+            "columna": "loan_grade",
+            "orden": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G"
+            ]
+        },
+        "one_hot": [
+            "person_home_ownership",
+            "loan_intent"
+        ]
+    },
+    "outliers_entrenamiento": {
+        "metodo": "IQR",
+        "columna": "person_emp_length",
+        "factor": 1.5,
+        "aplicar_a_nuevos_datos": false
+    }
+}

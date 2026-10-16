@@ -1,0 +1,1 @@
+"""Lectura y preparación funcional de los datos."""
